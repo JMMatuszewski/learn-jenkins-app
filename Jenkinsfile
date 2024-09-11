@@ -31,7 +31,9 @@ pipeline {
 
             steps {
                 sh '''
+                echo "Test"
                 (ls build/index.html && echo yes) || echo no
+                npm test
                 '''
             }
         }
