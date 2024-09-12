@@ -106,7 +106,7 @@ pipeline {
             }
 
             environment {
-                CI_ENVIRONMENT_URL = "$(env.STAGIN_URL)"
+                CI_ENVIRONMENT_URL = "${env.STAGIN_URL}"
             }
 
             steps {
