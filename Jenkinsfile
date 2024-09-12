@@ -2,7 +2,7 @@ pipeline {
     agent any
 
     environment {
-        NETLIFY_SITE_ID = 'a349df27-c4ac-4ec7-b031-6ff69bc37fc5'
+        NETLIFY_SITE_ID = 'PUT YOUR NETLIFY SITE ID HERE'
         NETLIFY_AUTH_TOKEN = credentials('netlify-token')
     }
 
@@ -17,7 +17,6 @@ pipeline {
             }
             steps {
                 sh '''
-                    echo 'small change'
                     ls -la
                     node --version
                     npm --version
@@ -27,10 +26,10 @@ pipeline {
                 '''
             }
         }
-        
-        stage('Run Tests'){
+
+        stage('Tests') {
             parallel {
-                stage('Unit test') {
+                stage('Unit tests') {
                     agent {
                         docker {
                             image 'node:18-alpine'
@@ -44,7 +43,6 @@ pipeline {
                             npm test
                         '''
                     }
-                    
                     post {
                         always {
                             junit 'jest-results/junit.xml'
@@ -65,7 +63,7 @@ pipeline {
                             npm install serve
                             node_modules/.bin/serve -s build &
                             sleep 10
-                            npx playwright test --reporter=html
+                            npx playwright test  --reporter=html
                         '''
                     }
 
@@ -110,7 +108,7 @@ pipeline {
 
             steps {
                 sh '''
-                    npx playwright test --reporter=html
+                    npx playwright test  --reporter=html
                 '''
             }
 
